@@ -1,5 +1,5 @@
 Запустить файл с помощью команды:
- ./main.py 
+` ./main.py `
  или
- python3 main.py
+ `python3 main.py`
   
