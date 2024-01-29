@@ -2,22 +2,22 @@
 # -*- coding: utf-8 -*-
 
 
-import random 
+import random
 
 
 print('Game start')
 
-# Базовый класс для игроков 
+# basic class
 class Player():
 
-    # Здоровье игроков 
+    # health
     hp = 100
-    
+
 
     def name(self):
         return self.__class__.__name__
 
-    # Функция вычисления урона умеренной атаки
+    # Moderate attack damage calculation function
     def attack(self, player):
         damage  = random.randint(18, 25)
         print(self.name(),' make a normal attack to a ',player.name() , ' and make ' , damage ,' damage.')
@@ -25,76 +25,75 @@ class Player():
         if player.hp < 0:
             player.hp = 0
 
-    # Функция вычисления урона в большом диапазоне атаки
+    # Function for calculating damage over a large attack range
     def powerAttack(self, player):
-        powerdamage = random.randint(10,35)       
+        powerdamage = random.randint(10,35)
         print(self.name(),' make a power attack to a ',player.name() , ' and make ' , powerdamage ,' damage.')
         player.hp -= powerdamage
         if player.hp < 0:
             player.hp = 0
 
-    # Функция исцеления в небольшом диапазоне 
+    # Healing function in a small range
     def heal(self):
         heal = random.randint(18, 25)
-        self.hp += heal 
+        self.hp += heal
         print(self.name(), ' heal itself for ', heal, 'points')
-        
+
         if self.hp >= 100:
             self.hp = 100
 
-# Производный класс
+# Derived class
 class Human(Player):
-    pass    
+    pass
 human = Human()
 
-# Производный класс
+# Derived class
 class Computer(Player):
 
-    # Функция увеличивающая шанс на исцеление 
+    # Function that increases the chance of healing
     def boostHeal(self):
-        if computer.hp < 35:    
+        if computer.hp < 35:
             print('SUPER HEALING CHANCE')
-            actions = random.choice(['attack', 'powerAttack'])  
+            actions = random.choice(['attack', 'powerAttack'])
             action = random.choice([actions ,'heal'])
-    
-computer = Computer()   
 
-# Случайный выбор игрока
+computer = Computer()
+
+# Random player selection
 users = [computer, human]
 random.shuffle(users)
 
-# Цикл  
 while True:
 
     firstUser = users[0]
     secondUser = users[1]
 
-    # Случайный выбор действия 
+    # Random action selection
     action = random.choice(['attack', 'powerAttack','heal'])
-    
+
     if action == 'attack':
         firstUser.attack(secondUser)
     elif action == 'powerAttack':
         firstUser.powerAttack(secondUser)
     elif action == 'heal':
         firstUser.heal()
-    
-    # Вывод информации о уровне здоровья 
+
+    # Displaying information about your health level
     print(firstUser.name(),' health: ', firstUser.hp)
     print(secondUser.name(),' health: ', secondUser.hp)
-    
-    # Определение конца цикла 
-    if firstUser.hp <= 0:  
+
+    # Determining the end of a loop
+    if firstUser.hp <= 0:
         loser = firstUser.name()
         break
     elif secondUser.hp <= 0:
         loser = secondUser.name()
         break
-    
-    # Реверс массива с игроками 
+
+    # Reverse array with players
     users.reverse()
 
     computer.boostHeal()
-    
+
 
 print(loser,'lose')

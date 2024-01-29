@@ -1,5 +1,4 @@
-Запустить файл с помощью команды:
+Run the file using the command:
 ` ./main.py `
- или
+ or
  `python3 main.py`
-  
